@@ -5,14 +5,13 @@ import pandas as pd, numpy as np, matplotlib.pyplot as plt, seaborn as sns
 from sklearn.linear_model import LogisticRegression, LinearRegression
 import statsmodels.api as sm
 from sklearn import linear_model
-data_path = 'C:/Users/Nick/Desktop/nfl_sas/nfl_2009_2018.csv'
+data_path = '.../nfl_2009_2018.csv'
 
 nec_cols = ['game_id', 'drive', 'play_id', 'play_type', 'half_seconds_remaining',
             'posteam_score', 'posteam_score_post', 'yardline_100']
 
 # Import & Explore Data
 nfl_df = pd.read_csv(data_path, usecols = nec_cols).fillna(0)
-
 
 # Create Primary Key for Each Drive
 drive_prim_key = []
@@ -64,55 +63,19 @@ for r in set(drive_df['drive_result']):
     
 drive_df_us = pd.concat(us_df_list)
 
-        
-        
-
-
-
-
-
-
 # Fit Regression
 x = drive_df[['yardline_100', 'half_seconds_remaining', 'yardline_seconds_intx']].values
 y = drive_df['score_on_drive'].values.reshape(drive_df.shape[0], 1)
-
 regr = LinearRegression().fit(x,y)
-
 fitted_vals = regr.predict(x)
-
 fit_assess_df = pd.DataFrame({'pred': [i[0] for i in fitted_vals],
                               'actual': [y for y in drive_df['score_on_drive']]})
 
-    
+# Plot Pred v. Actual
 plt.scatter(fit_assess_df['pred'], fit_assess_df['actual'],  color='black')
 plt.xticks(())
 plt.yticks(())
 plt.show()
 
 ax = sns.violinplot(x="actual", y="pred", hue="actual", data=fit_assess_df)
-plt.show()    
-    
-    
-    
-
-
-
-
-
-
-
-
-play_types = set(nfl_df['play_type'])
-nfl_df_10 = nfl_df.head(10)
-nfl_cols = [c for c in nfl_df.columns]
-
-# Isolate & Explore Punt Data
-
-
-
-
-
-
-
-
-
+plt.show()   
