@@ -4,7 +4,7 @@
 import pandas as pd, numpy as np, matplotlib.pyplot as plt, seaborn as sns
 
 # Input Files
-input_folder_path = 'C:/Users/Nick/Desktop/prob_output/'
+input_folder_path = '.../prob_output/'
 punt_file = 'punt_prob_df.csv'
 conversion_file = 'conversion_probability_df.csv'
 field_goal_file = 'fg_probability_df.csv'
