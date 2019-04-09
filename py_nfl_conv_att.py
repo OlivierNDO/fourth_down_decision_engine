@@ -1,6 +1,5 @@
 # 1st Down Conversion Likelihood
 ##############################################################
-
 # Package Imports & Configuation
 import pandas as pd, numpy as np, matplotlib.pyplot as plt, seaborn as sns
 from sklearn.linear_model import LogisticRegression
