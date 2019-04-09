@@ -5,13 +5,11 @@ import pandas as pd, numpy as np, matplotlib.pyplot as plt, seaborn as sns
 from sklearn.linear_model import LogisticRegression, LinearRegression
 import statsmodels.api as sm
 from sklearn import linear_model
-data_path = 'C:/Users/Nick/Desktop/nfl_sas/nfl_2009_2018.csv'
+data_path = '.../nfl_2009_2018.csv'
 
 # Import & Explore Data
 nfl_df = pd.read_csv(data_path)
 play_types = set(nfl_df['play_type'])
-nfl_df_10 = nfl_df.head(10)
-nfl_cols = [c for c in nfl_df.columns]
 
 # Isolate & Explore Punt Data
 punt_df = nfl_df[nfl_df.play_type == 'punt'][['yardline_100', 'kick_distance', 'return_yards']]
@@ -38,7 +36,6 @@ pred_distances = pd.DataFrame({'yardline_100': [i for i in range(100)],
 
 x = punt_df[['yardline_100', 'yardline_100_sq']].values
 y = punt_df['opponent_yds_to_endzone'].values.reshape(punt_df.shape[0], 1)
-
 regr = LinearRegression().fit(x,y)
 
 plt.scatter(punt_df[['yardline_100']].values.reshape(punt_df.shape[0], 1), y,  color='black')
@@ -50,4 +47,4 @@ plt.show()
 # Create Output File
 pred_distances['opponent_yds_to_endzone'] = regr.predict(pred_distances.values)
 pred_distances.drop('yardline_100_sq', axis = 1, inplace = True)
-pred_distances.to_csv('C:/Users/Nick/Desktop/nfl_sas/punt_prob_df.csv', index = False)
+pred_distances.to_csv('.../punt_prob_df.csv', index = False)
