@@ -6,7 +6,7 @@ import pandas as pd, numpy as np, matplotlib.pyplot as plt, seaborn as sns
 from sklearn.linear_model import LogisticRegression
 import statsmodels.api as sm
 from sklearn import linear_model
-data_path = 'C:/Users/Nick/Desktop/nfl_sas/nfl_2009_2018.csv'
+data_path = '.../nfl_2009_2018.csv'
 
 # Import & Explore Data
 nfl_df = pd.read_csv(data_path)
@@ -16,7 +16,6 @@ nfl_cols = [c for c in nfl_df.columns]
 
 # Separate Dataframes by Fourth Down Playtype
 fourth_conv_att_df = nfl_df[(nfl_df['play_type'].isin(['run', 'pass'])) & (nfl_df['down'] == 4)][['ydstogo', 'yards_gained']]
-
 conv_att_success = []
 for i, x in enumerate(fourth_conv_att_df['ydstogo']):
      if x > list(fourth_conv_att_df['yards_gained'])[i]:
@@ -25,7 +24,6 @@ for i, x in enumerate(fourth_conv_att_df['ydstogo']):
          conv_att_success.append(1)
 
 fourth_conv_att_df['conv_att_success'] = conv_att_success
-
 fourth_conv_att_df['n'] = [i for i in range(fourth_conv_att_df.shape[0])]
 
 # Fit Logistic Regression
@@ -67,19 +65,4 @@ plt.show()
 
 # Create Output File
 ##############################################################
-pred_distances.to_csv('C:/Users/Nick/Desktop/nfl_sas/conversion_probability_df.csv', index = False)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+pred_distances.to_csv('.../conversion_probability_df.csv', index = False)
