@@ -5,7 +5,7 @@ import pandas as pd, numpy as np, matplotlib.pyplot as plt, seaborn as sns
 from sklearn.linear_model import LogisticRegression
 import statsmodels.api as sm
 from sklearn import linear_model
-data_path = 'C:/Users/Nick/Desktop/nfl_sas/nfl_2009_2018.csv'
+data_path = '.../nfl_2009_2018.csv'
 
 # Import & Explore Data
 nfl_df = pd.read_csv(data_path, usecols = ['play_type', 'down', 'yardline_100', 'field_goal_result'])
@@ -29,13 +29,8 @@ for i in fg_prob_df['field_goal_result']:
 
 fg_prob_df['field_goal_result_binary'] = fgr
 fg_prob_df['yardline_100_sq'] = [i**2 for i in fg_prob_df['yardline_100']]
-
-#fg_prob_df['field_goal_distance'] = [i + 17 for i in fg_prob_df['yardline_100']]
-#fg_prob_df['field_goal_distance_sq'] = [i**2 for i in fg_prob_df['field_goal_distance']]
 fg_prob_df['n'] = [i for i in range(fg_prob_df.shape[0])]
 fg_prob_df.dropna(axis = 0, inplace = True)
-
-
 
 # Fit Regression
 fg_clf = LogisticRegression(fit_intercept = True)
@@ -52,7 +47,6 @@ fg_summ_df = fg_prob_df.\
 groupby(['yardline_100'], as_index = False).\
 agg({'field_goal_result_binary':'mean',
      'n':'nunique'})
-
 
 plt.scatter(x = pred_distances['yardline_100'],
             y = pred_distances['expected_probability'],
@@ -76,7 +70,4 @@ plt.show()
 # Create Output File
 ##############################################################
 output = pred_distances[['yardline_100', 'expected_probability']]
-output.to_csv('C:/Users/Nick/Desktop/nfl_sas/fg_probability_df.csv', index = False)
-
-
-
+output.to_csv('.../fg_probability_df.csv', index = False)
