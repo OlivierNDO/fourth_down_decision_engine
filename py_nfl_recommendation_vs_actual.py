@@ -5,13 +5,13 @@ import pandas as pd, numpy as np, matplotlib.pyplot as plt, seaborn as sns
 import gc
 
 # Input Files
-input_folder_path = 'C:/Users/Nick/Desktop/prob_output/'
+input_folder_path = '.../prob_output/'
 punt_file = 'punt_prob_df.csv'
 conversion_file = 'conversion_probability_df.csv'
 field_goal_file = 'fg_probability_df.csv'
 drive_score_file = 'drive_score_probability_df.csv'
 
-
+# Define Class Object
 class fourth_down_decision:
     def __init__(self, input_folder, conv_file, fg_file, ds_file, punt_file,
                  sec_left_in_half, yardline_100, yds_to_go):
@@ -119,7 +119,6 @@ class fourth_down_decision:
         else:
             return decision
         
-
 # Compare Actual Fourth Down Decisions to Algorithm Recommendations            
 nfl_df = pd.read_csv('C:/Users/Nick/Desktop/nfl_sas/nfl_2009_2018.csv')
 keep_cols = ['ydstogo', 'down', 'play_type', 'yardline_100', 'half_seconds_remaining']
@@ -157,8 +156,3 @@ output = pd.DataFrame({'recommendation': recommendation,
                        'actual_decision': decision_list})
     
 output.to_csv(input_folder_path + 'rec_vs_actual.csv')
-
-
-
-
-
